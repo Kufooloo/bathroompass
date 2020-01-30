@@ -11,13 +11,14 @@ def default():
  return "hello World"
 @app.route('/back')
 def back():
- return render_template('back.html')
+ now = datetime.datetime.now().strftime("%H:%M:%S")
+ return render_template('back.html', variable=now)
 @app.route('/')
 def home():
  date_today = datetime.datetime.now().strftime("%Y-%m-%d")
  date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
  path = os.getcwd()
- f = path+'//signoutsheets//'+date_today+'.csv'
+ f = path+'//signoutsheets//'+date_today+'signoutlog'+'.csv'
  open(f, mode='a+')
  if os.stat(f).st_size !=0:
   with open(f, mode='a+') as signout:
@@ -36,7 +37,7 @@ def my_form_post():
  date_today = datetime.datetime.now().strftime("%Y-%m-%d")
  date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
  path = os.getcwd()
- f = path+'//signoutsheets//'+date_today+'.csv'
+ f = path+'//signoutsheets//'+date_today+'signoutlog'+'.csv'
 
  with open(f, mode='a+') as signout:
   signout_writer = csv.writer(signout, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
