@@ -2,26 +2,30 @@
 <html>
 <head>
   <script>
-    var d = {{ variable }}
-  
+   var doneStuff;
+   if (!doneStuff);
+    doneStuff = true;
+    var timeStart = new Date().getTime();
+    var teachervar = false;
+   var color = red;
+   
+
+    
     
     </script>
 
 
 
 </head>
-<body>
-  <h1>
-the value for number is:
- <script type="text/javascript">
-   document.write(d) 
-  </script>
+
+<body style="background-color:color;">
 </h1>
-<h2>A student is currently out</h2>
+<h2>{{ fnamew }} is currently out</h2>
 <p>Press the button below if you are returning. </p>
 <p2>The student left at: {{ variable }}</p2>
 
 <p id="demo"></p>
+<p id="alert"></p>
 <script>
   // Set the date we're counting down to
   var countDownDate = new Date().getTime();
@@ -33,34 +37,53 @@ the value for number is:
     // Get today's date and time
     var now = new Date().getTime();
   
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
+     
   
+    // Find the distance between now and the count down date
+    var distance =  now - timeStart;
+    var colour = "white";
+    var out = 0;
+    
+
+    document.body.style.backgroundColor = colour;
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+   
+      
   
     // Display the result in the element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
+    document.getElementById("demo").innerHTML =  hours + "h "
+    + minutes + "m " + seconds + "s "  ;
   
     // If the count down is finished, write some text
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
+    if (distance > 600000&&!teachervar) {
+      
+      document.getElementById("alert").innerHTML = "STUDENT HAS BEEN OUT FOR MORE THAN 10 MINUTES. PLEASE ALERT YOUR TEACHER!";
+      if (seconds%2 == 0 &&!teachervar)
+      {
+      var colour = "red"
+      document.body.style.backgroundColor = colour;
+      }
     }
   }, 1000);
   </script>
 
 
 
-<button onclick="myFunction()">I'm back</button>
+<button onclick="goto()">I'm back</button>
 
 <script>
-function myFunction() {
+function goto() {
   location.replace("http://127.0.0.1:5000/")
 }
-</script>
-
+</script> 
+<button onclick="teacher()">Turn Off Alert</button>
+<script>
+function teacher() {
+  teachervar=true;
+  }
+</script> 
+</body>

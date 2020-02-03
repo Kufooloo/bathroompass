@@ -1,35 +1,50 @@
 from flask import Flask, render_template, request, redirect
 import os
 import time 
+  
 import datetime
 import time
 import csv
-
+fname = "error"
+lname = "error"
+timeleft = datetime.datetime.now()
 app = Flask(__name__)
 @app.route('/credits')
 def default():
  return "hello World"
 @app.route('/back')
 def back():
+ global fname
+ global lname
+ 
  now = datetime.datetime.now().strftime("%H:%M:%S")
- return render_template('back.html', variable=now)
+ return render_template('back.html', variable=now, fnamew=fname, lnamew=lname)
 @app.route('/')
 def home():
+ global fname
+ global lname
+ global timeleft 
+ 
  date_today = datetime.datetime.now().strftime("%Y-%m-%d")
  date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+ now = datetime.datetime.now()
+ timereturn = now-timeleft
  path = os.getcwd()
  f = path+'//signoutsheets//'+date_today+'signoutlog'+'.csv'
  open(f, mode='a+')
- if os.stat(f).st_size !=0:
+ if fname != "error" or lname != "error":
   with open(f, mode='a+') as signout:
    signout_writer = csv.writer(signout, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-   signout_writer.writerow([date,str("returned")])
+   signout_writer.writerow([fname.upper(), lname.upper(), date,str("returned"), str("total time out: ") + str(timereturn)])
 
- return render_template('home.html')
+ return render_template('home.html' )
  
 @app.route('/', methods=['POST'])
 def my_form_post():
+ global fname
+ global lname
+ global timeleft
  fname = request.form['fname']
  lname = request.form['lname']
  lname_up = lname.upper()
@@ -38,10 +53,11 @@ def my_form_post():
  date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
  path = os.getcwd()
  f = path+'//signoutsheets//'+date_today+'signoutlog'+'.csv'
-
- with open(f, mode='a+') as signout:
-  signout_writer = csv.writer(signout, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-  signout_writer.writerow([fname_up,lname_up,date,str("left")])
+ timeleft = datetime.datetime.now()
+ if fname != 'error' or lname != 'error':
+  with open(f, mode='a+') as signout:
+   signout_writer = csv.writer(signout, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+   signout_writer.writerow([fname_up,lname_up,date,str("left")])
 
  return redirect('http://127.0.0.1:5000/back')
  
