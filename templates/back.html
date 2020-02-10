@@ -17,6 +17,12 @@
 
 
 </head>
+<script>
+  function setvariables(){
+    document.getElementById("alert").innerHTML = "STUDENT HAS BEEN OUT FOR MORE THAN 10 MINUTES. PLEASE ALERT YOUR TEACHER!";
+    document.getElementById("disable").disabled = false; 
+  }
+</script>
 
 <body style="background-color:color;">
 </h1>
@@ -58,11 +64,11 @@
     document.getElementById("demo").innerHTML =  hours + "h "
     + minutes + "m " + seconds + "s "  ;
   
-    // If the count down is finished, write some text
+    // if time is >10
     if (distance > 600000&&!teachervar) {
-      
-      document.getElementById("alert").innerHTML = "STUDENT HAS BEEN OUT FOR MORE THAN 10 MINUTES. PLEASE ALERT YOUR TEACHER!";
+      setvariables()
       if (seconds%2 == 0 &&!teachervar)
+      
       {
       var colour = "red"
       document.body.style.backgroundColor = colour;
@@ -70,7 +76,8 @@
     }
   }, 1000);
   </script>
-
+  <!-- most of the code is written by an example. I mearly addaped it for my needs. From the start of this script 
+  till the end of the script -->
 
 
 <button onclick="goto()">I'm back</button>
@@ -80,7 +87,7 @@ function goto() {
   location.replace("http://127.0.0.1:5000/")
 }
 </script> 
-<button onclick="teacher()">Turn Off Alert</button>
+<button id = 'disable'onclick="teacher()" disabled >Turn Off Alert</button>
 <script>
 function teacher() {
   teachervar=true;
