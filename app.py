@@ -23,7 +23,7 @@ def home():
  global timeleft 
  
  date_today = datetime.datetime.now().strftime("%Y-%m-%d")
- date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+ date = datetime.datetime.now().strftime("%H:%M:%S")
  now = datetime.datetime.now()
  timereturn = now-timeleft
  path = os.getcwd()
@@ -47,7 +47,7 @@ def my_form_post():
  lname_up = lname.upper()
  fname_up = fname.upper()
  date_today = datetime.datetime.now().strftime("%Y-%m-%d")
- date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+ date = datetime.datetime.now().strftime("%H:%M:%S")
  path = os.getcwd()
  f = path+'//signoutsheets//'+date_today+'signoutlog'+'.csv'
  timeleft = datetime.datetime.now()
