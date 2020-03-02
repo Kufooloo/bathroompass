@@ -17,7 +17,7 @@
 <script>
   function setvariables() {
     document.getElementById("alert").innerHTML =
-      "STUDENT HAS BEEN OUT FOR MORE THAN 10 MINUTES. PLEASE ALERT YOUR TEACHER!";
+      "STUDENT HAS BEEN OUT FOR MORE THAN 7 MINUTES. PLEASE ALERT YOUR TEACHER!";
     document.getElementById("disable").disabled = false;
   }
 </script>
@@ -52,7 +52,7 @@
       document.getElementById("demo").innerHTML = hours + "h " +
         minutes + "m " + seconds + "s ";
       // 600000=10mins
-      if (distance > (600000/10)*.25 && !teachervar) {
+      if (distance > (600000/10)*7 && !teachervar) {
         setvariables()
         if (seconds % 2 == 0 && !teachervar)
         {
