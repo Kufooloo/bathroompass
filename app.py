@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import os
-import time 
-  
 import datetime
-import time
 import csv
 fname = "error"
 lname = "error"
